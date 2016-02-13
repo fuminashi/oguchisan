@@ -20,7 +20,7 @@ module.exports = (robot) ->
   robot.hear /おやすみ/i, (msg) ->
     msg.send "おやすみなさい。しっかり休んでくださいね。"
 
-  robot.hear /こんにちは/i (msg) ->
+  robot.hear /こんにちは/i, (msg) ->
     username = msg.message.user.name
     msg.send username + " さん、こんにちは。"
     
