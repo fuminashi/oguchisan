@@ -1,7 +1,8 @@
 # from ochapro/scripts/kaomoji.coffee 
 module.exports = (robot) ->
   robot.respond /kaomoji/i, (msg) ->
-    msg.send msg.random ["（*・ω・*）",
+    msg.send msg.random ["(^^;)",
+       "（*・ω・*）",
 			 "Σd(≧▽≦*)",
 			 "(*^o^)／＼(^-^*)",
 			 " (=U･ω･U=)",
@@ -23,4 +24,4 @@ module.exports = (robot) ->
 			 "(((・ω・)))"]
 
   robot.adapter.on 'connected', () ->
-    robot.send room: 'hubot-dev', "再起動中… あとでスクリプト読み込んでね"
+    robot.send room: 'hubot-dev', "再起動中… あとでスクリプトを読み込んでください。"
