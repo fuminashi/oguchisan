@@ -24,4 +24,4 @@ module.exports = (robot) ->
 			 "(((・ω・)))"]
 
   robot.adapter.on 'connected', () ->
-    robot.send room: 'hubot-dev', "再起動中… あとでスクリプトを読み込んでください。"
+    robot.send room: 'room_fuminashi', "再起動中… あとでスクリプトを読み込んでください。"
