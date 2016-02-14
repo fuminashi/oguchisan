@@ -15,15 +15,21 @@ module.exports = (robot) ->
     	# 午後
     	msg.send str + "\nゆっくり眠れましたか？" + end
     else 
-      msg.send str + "\nといっても外は真っ暗ですが(^^;)" + end
+      msg.send str + "といっても外は真っ暗ですが(^^;)\n" + end
       
-  robot.hear /おやすみ/i, (msg) ->
+  robot.hear /おやすみ|お休み/i, (msg) ->
     msg.send "おやすみなさい。しっかり休んでくださいね。"
 
   robot.hear /こんにちは/i, (msg) ->
     username = msg.message.user.name
     msg.send username + " さん、こんにちは。"
     
+  robot.hear /time|じかん|時間|何時|なんじ/i, (msg) ->
+    d = new Date
+    hour = (d.getHours() + 9 + 24) % 24
+    minute = d.getMinutes()
+    second = d.getSeconds()
+    msg.send "#{hour}時 #{minute}分 #{second}秒 です。"
 
-  robot.adapter.on 'connected', () ->
-    robot.send room: 'dev_oguchisan', "再起動中… あとでスクリプトを読み込んでください。"
+#  robot.adapter.on 'connected', () ->
+#    robot.send room: 'dev_oguchisan', "再起動中… あとでスクリプトを読み込んでください。"
