@@ -1,7 +1,7 @@
 module.exports = (robot) ->
   robot.hear /おはよう/i, (msg) ->
   	d = new Date
-  	hour = (d.getHours() + 9) %% 24
+  	hour = (d.getHours() + 9 + 24) % 24
   	minute = d.getMinutes()
   	second = d.getSeconds()
   	str = "おはようございます。"
@@ -26,4 +26,4 @@ module.exports = (robot) ->
     
 
   robot.adapter.on 'connected', () ->
-    robot.send room: 'room_fuminashi', "再起動中… あとでスクリプトを読み込んでください。"
+    robot.send room: 'dev_oguchisan', "再起動中… あとでスクリプトを読み込んでください。"
