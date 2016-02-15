@@ -1,5 +1,5 @@
 module.exports = (robot) ->
-  robot.hear /おはよう/i, (msg) ->
+  robot.respond /おは/i, (msg) ->
   	d = new Date
   	hour = (d.getHours() + 9 + 24) % 24
   	minute = d.getMinutes()
@@ -20,16 +20,35 @@ module.exports = (robot) ->
   robot.hear /おやすみ|お休み/i, (msg) ->
     msg.send "おやすみなさい。しっかり休んでくださいね。"
 
-  robot.hear /こんにちは/i, (msg) ->
+  robot.respond /おやすみ?|お休み/i, (msg) ->
+    msg.send "おやすみなさい。しっかり休んでくださいね。"
+
+  robot.respond /こんにち(は|わ)/i, (msg) ->
     username = msg.message.user.name
     msg.send username + " さん、こんにちは。"
-    
-  robot.hear /^(@?oguchisan:?\s*)+(い?ま?|今?)+(じかん|時間|何時|なんじ)/i, (msg) ->
+
+  robot.respond /こんばん(は|わ)/i, (msg) ->
+    username = msg.message.user.name
+    str = username + " さん、こんばんは。"
+    d = new Date
+    hour = (d.getHours() + 9 + 24) % 24
+    if hour < 5 or hour > 16
+      msg.send str
+    else
+      msg.send str + "\n... こんばんは？(^^;)"
+
+  robot.respond /(い?ま?|今?)+(じかん|時間|何時|なんじ)/i, (msg) ->
     d = new Date
     hour = (d.getHours() + 9 + 24) % 24
     minute = d.getMinutes()
     second = d.getSeconds()
     msg.send "#{hour}時 #{minute}分 #{second}秒 です。"
+    
+  robot.respond /なんで.*で?す?か?？$/i, (msg) ->
+    msg.send "...なんでしょうね。(^^;)"
+
+  robot.respond /どうして.*で?す?か?？$/i, (msg) ->
+    msg.send "...どうしてでしょうね。(^^;)"
 
 #  robot.adapter.on 'connected', () ->
 #    robot.send room: 'dev_oguchisan', "再起動中… あとでスクリプトを読み込んでください。"
