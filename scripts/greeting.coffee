@@ -24,7 +24,7 @@ module.exports = (robot) ->
     username = msg.message.user.name
     msg.send username + " さん、こんにちは。"
     
-  robot.hear /^じかん|時間|何時|なんじ/i, (msg) ->
+  robot.hear /^(@?oguchisan\s*)+(い?ま?|今?)+(じかん|時間|何時|なんじ)/i, (msg) ->
     d = new Date
     hour = (d.getHours() + 9 + 24) % 24
     minute = d.getMinutes()
