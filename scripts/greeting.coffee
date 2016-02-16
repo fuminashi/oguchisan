@@ -55,7 +55,7 @@ module.exports = (robot) ->
 
   robot.respond /疲れ|つかれ|つらい|辛い|しんど|(死|氏|市|士|私|し)に(たい|鯛|体|帯)|sh?initai/i, (msg) ->
     username = msg.message.user.name
-    str = username + " さんなら出来ますよ！"
+    str = username + " さんなら大丈夫ですよ！"
     hagemashi = [
     	      "大丈夫ですか？時には休憩も重要です。"
 	      "走ると嫌なことを考えなくてすみますよ。(^^;)"
