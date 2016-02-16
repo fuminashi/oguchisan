@@ -86,8 +86,10 @@ module.exports = (robot) ->
       0
     ]
     i = msg.random ret
+    input = msg.match[0]
     j = input.search(/@oguchisan/i)
-    if (j > -1) then msg.send "なんでしょう？"
+    # msg.send j+input+"\n"
+    if (j isnt -1) then msg.send "なんでしょう？"
     else if (i is 1) then msg.send "呼びました？(^^;)"
 
 #  robot.adapter.on 'connected', () ->
