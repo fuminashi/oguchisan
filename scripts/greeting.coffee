@@ -73,7 +73,7 @@ module.exports = (robot) ->
     msg.send "そうですね、周りの人に助けを求めてみましょう。"
 
   robot.hear "小口|おぐち|先生|せんせ|センセ|oguchi", (msg) ->
-    ret = msg.random [
+    ret = [
       1
       2
       3
@@ -86,7 +86,7 @@ module.exports = (robot) ->
       0
     ]
     i = msg.random ret
-    if i = 1 then msg.send "呼びました？(^^;)"
+    if (i is 1) then msg.send "呼びました？(^^;)"
 
 #  robot.adapter.on 'connected', () ->
 #    robot.send room: 'dev_oguchisan', "再起動中… あとでスクリプトを読み込んでください。"
