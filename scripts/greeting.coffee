@@ -72,7 +72,7 @@ module.exports = (robot) ->
   robot.respond /(分か|わか)(ら|ん)/i, (msg) ->
     msg.send "そうですね、周りの人に助けを求めてみましょう。"
 
-  robot.hear "小口|おぐち|先生|ちぇんちぇ|せんせ|センセ|oguchi", (msg) ->
+  robot.hear ".*(小口|おぐち|おぐって|おぐおぐ|先生|ちぇんちぇ|せんせ|センセ|oguchi).*", (msg) ->
     ret = [
       1
       2
@@ -86,7 +86,8 @@ module.exports = (robot) ->
       0
     ]
     i = msg.random ret
-    if ((msg.match[0]).search(/oguchisan/) is 1) then msg.send "なんでしょう？"
+    j = input.search(/@oguchisan/i)
+    if (j > -1) then msg.send "なんでしょう？"
     else if (i is 1) then msg.send "呼びました？(^^;)"
 
 #  robot.adapter.on 'connected', () ->
