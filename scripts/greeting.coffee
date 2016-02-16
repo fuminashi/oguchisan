@@ -1,33 +1,33 @@
 module.exports = (robot) ->
+  reaction = 0
   robot.respond /おは/i, (msg) ->
-  	d = new Date
-  	hour = (d.getHours() + 9 + 24) % 24
-  	minute = d.getMinutes()
-  	second = d.getSeconds()
-  	str = "おはようございます。"
-  	end = "今日も一日頑張りましょう。"
-  	if hour < 7
-  	  msg.send str + "\nだいぶ早起きですね。" + end
-    else if hour < 12 
-  		# 午前中
-    	msg.send str + "\n清々しい朝ですね。" + end
+    reaction++
+    d = new Date
+    hour = (d.getHours() + 9 + 24) % 24
+    str = "おはようございます。"
+    end = "今日も一日頑張りましょう。"
+    if hour < 7
+      msg.send str + "\nだいぶ早起きですね。" + end
+    else if hour < 12
+      # 午前中
+      msg.send str + "\n清々しい朝ですね。" + end
     else if hour < 17
-    	# 午後
-    	msg.send str + "\nゆっくり眠れましたか？" + end
-    else 
+      # 午後
+      msg.send str + "\nゆっくり眠れましたか？" + end
+    else
       msg.send str + "といっても外は真っ暗ですが(^^;)\n" + end
       
-  robot.hear /おやすみ|お休み/i, (msg) ->
-    msg.send "おやすみなさい。しっかり休んでくださいね。"
-
   robot.respond /おやすみ?|お休み/i, (msg) ->
+    reaction++
     msg.send "おやすみなさい。しっかり休んでくださいね。"
 
   robot.respond /こんにち(は|わ)/i, (msg) ->
+    reaction++
     username = msg.message.user.name
     msg.send username + " さん、こんにちは。"
 
   robot.respond /こんばん(は|わ)/i, (msg) ->
+    reaction++
     username = msg.message.user.name
     str = username + " さん、こんばんは。"
     d = new Date
@@ -38,6 +38,7 @@ module.exports = (robot) ->
       msg.send str + "\n... こんばんは？(^^;)"
 
   robot.respond /(い?ま?|今?)+(じかん|時間|何時|なんじ)/i, (msg) ->
+    reaction++
     d = new Date
     hour = (d.getHours() + 9 + 24) % 24
     minute = d.getMinutes()
@@ -45,15 +46,19 @@ module.exports = (robot) ->
     msg.send "#{hour}時 #{minute}分 #{second}秒 です。"
     
   robot.respond /なんで.*で?す?か?？$/i, (msg) ->
+    reaction++
     msg.send "...なんでしょうね。(^^;)"
 
   robot.respond /どうして.*で?す?か?？$/i, (msg) ->
+    reaction++
     msg.send "...どうしてでしょうね。(^^;)"
 
   robot.respond /頑張|がんば|ガンバ/i, (msg) ->
+    reaction++
     msg.send "一緒に頑張りましょう！"
 
   robot.respond /疲れ|つかれ|つらい|辛い|しんど|(死|氏|市|士|私|し)に(たい|鯛|体|帯)|sh?initai/i, (msg) ->
+    reaction++
     username = msg.message.user.name
     str = username + " さんなら大丈夫ですよ！"
     hagemashi = [
@@ -67,9 +72,11 @@ module.exports = (robot) ->
 	      msg.send msg.random hagemashi
 
   robot.respond /(かなし|悲し|寂し|淋し|こわ|怖)(い|み)/i, (msg) ->
+    reaction++
     msg.send "大丈夫ですか？　甘いものを食べて、元気出してくださいね。"
 
   robot.respond /(分か|わか)(ら|ん)/i, (msg) ->
+    reaction++
     msg.send "そうですね、周りの人に助けを求めてみましょう。"
 
   robot.hear ".*(小口|おぐち|おぐって|おぐおぐ|先生|ちぇんちぇ|せんせ|センセ|oguchi).*", (msg) ->
@@ -88,8 +95,8 @@ module.exports = (robot) ->
     i = msg.random ret
     input = msg.match[0]
     j = input.search(/@oguchisan/i)
-    # msg.send j+input+"\n"
-    if (j isnt -1) then msg.send "なんでしょう？"
+    # msg.send reaction+input+"\n"
+    if (j isnt -1) and (reaction is 0) then msg.send "なんでしょう？"
     else if (i is 1) then msg.send "呼びました？(^^;)"
 
 #  robot.adapter.on 'connected', () ->
